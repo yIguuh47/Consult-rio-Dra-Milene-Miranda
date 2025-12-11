@@ -1,0 +1,123 @@
+/* --- Estilo do Header (Barra Superior) --- */
+header {
+    background-color: #b59e8f; 
+    width: 100%; 
+    padding: 0; 
+    margin: 0; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- O Novo Container para o Logo e o Menu --- */
+.container-header {
+    /* Centraliza o conteúdo horizontalmente na página (opcional, mas bom para websites grandes) */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    
+    /* Usa Flexbox para colocar os itens lado a lado */
+    display: flex; 
+    
+    /* Centraliza os itens verticalmente (Logo e Menu) */
+    align-items: center; 
+    
+    /* O MAIS IMPORTANTE: Joga o primeiro item (Logo) para a esquerda e o restante para a direita */
+    justify-content: space-between; 
+    
+    padding: 0 20px; /* Adiciona um pequeno espaço nas laterais para não encostar na borda */
+}
+
+/* --- Estilo da Imagem do Logo --- */
+.logo img {
+    /* Defina uma altura para a imagem do logo na barra de navegação */
+    height: 60px; /* Ajuste este valor conforme o seu gosto (ex: 50px, 70px) */
+    /* Garante que o link em volta do logo não tenha sublinhado */
+    border: none;
+}
+
+/* --- Limpeza e Posicionamento Horizontal (CORRIGIDO) --- */
+nav ul {
+    /* (Linha background-color foi removida/comentada) */
+    
+    /* 1. Remove as bolinhas (marcadores) da lista */
+    list-style: none; 
+    
+    /* 2. Remove o preenchimento padrão do navegador */
+    padding: 0; 
+    
+    /* 3. Remove a margem padrão do navegador */
+    margin: 0; 
+    
+    /* 4. O mais importante: Usa Flexbox para colocar os itens lado a lado */
+    display: flex; 
+    
+    /* 5. Centraliza os itens verticalmente (se houver alturas diferentes) */
+    align-items: center; 
+}
+
+/* --- Estilo dos Itens do Menu (os links <a>) --- */
+nav a {
+    /* Cor da fonte definida anteriormente para branco */
+    color: #ffffff; 
+    
+    /* Remove o sublinhado padrão dos links */
+    text-decoration: none; 
+    
+    /* Adiciona espaço interno ao redor do texto para aumentar a área clicável */
+    padding: 15px 25px; 
+    
+    /* Transforma os links em blocos para que o padding funcione corretamente */
+    display: block; 
+    
+    /* Transições suaves para efeitos de hover (opcional, mas profissional) */
+    transition: background-color 0.3s ease; 
+
+    font-weight: 300; /* Define a fonte fina (Light) */
+}
+
+/* --- Efeito de Hover (Ao passar o mouse) --- */
+nav a:hover {
+    /* Sugestão: Uma cor ligeiramente mais clara para dar feedback ao usuário */
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+/* --- Estilo do Corpo (body) --- */
+body {
+    /* (Manter as configurações que já fizemos) */
+    background-color: #c9b5a7; /* Fundo do site: Bege suave */
+    color: #ffffff; /* Cor da fonte padrão: Branco */
+    font-family: 'Montserrat', sans-serif;
+    margin: 0; /* É crucial remover a margem padrão do body para o header ocupar 100% */
+}
+
+/* --- Estilo do Header (Barra Superior) --- */
+header {
+    /* 1. Define a cor de fundo mais escura para a barra de menu */
+    background-color: #b59e8f; 
+    
+    /* 2. Garante que ocupe 100% da largura disponível */
+    width: 100%; 
+    
+    /* 3. Remove qualquer margem/preenchimento padrão para encostar nas bordas */
+    padding: 0; 
+    margin: 0; 
+    
+    /* 4. Adiciona uma pequena sombra sutil (opcional, para dar profundidade) */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Estilo dos Títulos das Seções (h2) --- */
+section h2 {
+    /* Garante que a fonte Montserrat seja usada nos títulos */
+    font-family: 'Montserrat', sans-serif;
+    
+    /* Define o peso da fonte para o fino (Light), como no logo e no menu */
+    font-weight: 300; 
+    
+    /* Aumenta o tamanho da fonte para dar destaque */
+    font-size: 2.2em; 
+    
+    /* Adiciona margem vertical para separar do conteúdo */
+    margin-top: 50px; 
+    margin-bottom: 20px;
+    
+    /* Adiciona padding horizontal para afastar das bordas laterais */
+    padding-left: 20px; 
+}
