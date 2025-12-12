@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css"> 
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 </head>
    <body>
 
@@ -22,11 +24,11 @@
             
             <nav class="menu-principal">
                 <ul>
-                    <li><a href="#feedbacks">Feedbacks e Antes e Depois</a></li>
-                    <li><a href="#sobre-a-doutora">Sobre a Doutora</a></li>
-                    <li><a href="#o-que-e-a-eme">O que é a Eme</a></li>
-                    <li><a href="#nosso-espaco">Nosso Espaço</a></li>
-                    <li><a href="#fale-conosco">Fale Conosco</a></li>
+                    <li><a href="#feedbacks">FEEDBACKS E ANTES E DEPOIS</a></li>
+                    <li><a href="#sobre-a-doutora">SOBRE A DOUTORA</a></li>
+                    <li><a href="#o-que-e-a-eme">O QUE É A EME</a></li>
+                    <li><a href="#nosso-espaco">NOSSO ESPAÇO</a></li>
+                    <li><a href="#fale-conosco">FALE CONOSCO</a></li>
                 </ul>
             </nav>
         </div>
@@ -34,6 +36,30 @@
 
         <section id="feedbacks">
             <h2>Resultados dos Pacientes</h2>
+
+                <div class="swiper instagram-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRk_TBiEfSD/?img_index=3" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%; max-width:100%;">
+                        </blockquote>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRdEbgmkX1g/?img_index=2" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%; max-width:100%;">
+                        </blockquote>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMnJ1lGxJYH/?img_index=2" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; padding:0; width:100%; max-width:100%;">
+                        </blockquote>
+                    </div>
+                </div>
+
+                <!-- controles -->
+                <div class="swiper-button-prev" aria-label="Anterior"></div>
+                <div class="swiper-button-next" aria-label="Próximo"></div>
+                <div class="swiper-pagination"></div>
+            </div>
         </section>
 
         <section id="sobre-a-doutora">
@@ -52,5 +78,34 @@
             <h2>Fale Conosco</h2>
         </section>
 
+    <script async defer src="https://www.instagram.com/embed.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+
+        <!-- Inicialização do Swiper e chamada para renderizar embeds do Instagram -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var swiper = new Swiper('.instagram-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        breakpoints: {
+          640: { slidesPerView: 1 },
+          900: { slidesPerView: 2 }
+        },
+        on: {
+          init: function () { if (window.instgrm && instgrm.Embeds) instgrm.Embeds.process(); },
+          slideChange: function () { if (window.instgrm && instgrm.Embeds) instgrm.Embeds.process(); }
+        }
+      });
+
+      // Caso o script do Instagram carregue depois, garantir processamento final
+      window.addEventListener('load', function () {
+        if (window.instgrm && instgrm.Embeds) instgrm.Embeds.process();
+      });
+    });
+    </script>
     </body>
 </html>

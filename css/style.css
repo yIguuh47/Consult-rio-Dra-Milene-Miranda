@@ -121,3 +121,40 @@ section h2 {
     /* Adiciona padding horizontal para afastar das bordas laterais */
     padding-left: 20px; 
 }
+
+/* --- Estilo do Carrossel de Instagram --- */
+.instagram-swiper { padding: 1rem 0; }
+.instagram-swiper .swiper-wrapper { align-items: center; }
+.instagram-swiper .swiper-slide {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:0.5rem;
+  box-sizing:border-box;
+  height: 760px; /* altura fixa do slide — ajuste conforme necessário */
+}
+
+/* forçar dimensão e overflow do embed do Instagram */
+.instagram-swiper .instagram-media {
+  width: 100% !important;
+  max-width: 760px;
+  height: 760px !important; /* altura do conteúdo dentro do slide */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* forçar iframe do embed a preencher o container */
+.instagram-swiper .instagram-media iframe {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  border: 0 !important;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+  .instagram-swiper .swiper-slide { height: 760px; }
+  .instagram-swiper .instagram-media { max-width: 360px; height: 360px !important; }
+}
