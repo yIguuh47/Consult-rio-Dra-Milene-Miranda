@@ -122,39 +122,107 @@ section h2 {
     padding-left: 20px; 
 }
 
-/* --- Estilo do Carrossel de Instagram --- */
-.instagram-swiper { padding: 1rem 0; }
-.instagram-swiper .swiper-wrapper { align-items: center; }
-.instagram-swiper .swiper-slide {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:0.5rem;
-  box-sizing:border-box;
-  height: 760px; /* altura fixa do slide — ajuste conforme necessário */
+/* Centraliza cada seção e adiciona espaçamento lateral */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; /* espaço nas extremidades */
+  box-sizing: border-box;
 }
 
-/* forçar dimensão e overflow do embed do Instagram */
-.instagram-swiper .instagram-media {
-  width: 100% !important;
-  max-width: 760px;
-  height: 760px !important; /* altura do conteúdo dentro do slide */
+/* Layout lado a lado da seção "Sobre a Dra" */
+.about-container{
+  display:flex;
+  gap:24px;
+  align-items:center;
+  max-width:1100px;
+  margin: 0 auto 1.5rem;
+  padding: 0 20px;
+  box-sizing:border-box;
+}
+
+/* Foto da Dra */
+.about-photo{
+  flex: 0 0 220px;
+  max-width: 220px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.about-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Texto: aumentar tamanho e melhorar leitura */
+.about-text{ flex:1; }
+.about-dra{
+  font-size: 1.05rem; /* ligeiro aumento */
+  line-height: 1.6;
+  margin: 0;
+  color: #ffffff;
+}
+
+/* Responsivo: empilha em telas menores */
+@media (max-width: 900px){
+  .about-container{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .about-photo{
+    flex-basis:180px;
+    max-width:180px;
+  }
+  .about-dra{ font-size:1rem; }
+}
+
+/* Melhora espaçamento interno do carrossel */
+.instagram-swiper {
+  width: 100%;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+.instagram-swiper .swiper-slide {
+  padding: 0.75rem; /* espaço entre slide e borda */
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* forçar iframe do embed a preencher o container */
-.instagram-swiper .instagram-media iframe {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  border: 0 !important;
+/* Limita largura do texto sobre a doutora e o centraliza */
+.about-dra {
+  max-width: 900px;
+  margin: 0.5rem auto 1.5rem;
+  line-height: 1.6;
+  text-align: left;
 }
 
-/* Ajustes responsivos */
+/* Ajustes responsivos para telas pequenas */
 @media (max-width: 600px) {
-  .instagram-swiper .swiper-slide { height: 760px; }
-  .instagram-swiper .instagram-media { max-width: 360px; height: 360px !important; }
+  section { padding: 0 14px; }
+  .about-dra { max-width: 100%; padding: 0; }
+}
+
+.about-dra{
+  font-size: 1.2rem; /* aumento do tamanho */
+  line-height: 1.6;
+  margin: 0;
+  color: #ffffff;
+}
+
+@media (max-width: 900px){
+  .about-container{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .about-photo{
+    flex-basis:180px;
+    max-width:180px;
+  }
+  .about-dra{ font-size:1.05rem; } /* ajuste responsivo */
 }
