@@ -1,3 +1,13 @@
+
+body {
+    /* (Manter as configurações que já fizemos) */
+    background-color: #fffaf5; /* Fundo do site: Bege suave */
+    color: #B69987; /* Cor da fonte padrão: Branco */
+    font-family: 'Montserrat', sans-serif;
+    margin: 0; /* É crucial remover a margem padrão do body para o header ocupar 100% */
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+}
+
 /* --- Estilo do Header (Barra Superior) --- */
 header {
     background-color: #b59e8f; 
@@ -79,29 +89,7 @@ nav a:hover {
     background-color: rgba(255, 255, 255, 0.1); 
 }
 /* --- Estilo do Corpo (body) --- */
-body {
-    /* (Manter as configurações que já fizemos) */
-    background-color: #c9b5a7; /* Fundo do site: Bege suave */
-    color: #ffffff; /* Cor da fonte padrão: Branco */
-    font-family: 'Montserrat', sans-serif;
-    margin: 0; /* É crucial remover a margem padrão do body para o header ocupar 100% */
-}
 
-/* --- Estilo do Header (Barra Superior) --- */
-header {
-    /* 1. Define a cor de fundo mais escura para a barra de menu */
-    background-color: #b59e8f; 
-    
-    /* 2. Garante que ocupe 100% da largura disponível */
-    width: 100%; 
-    
-    /* 3. Remove qualquer margem/preenchimento padrão para encostar nas bordas */
-    padding: 0; 
-    margin: 0; 
-    
-    /* 4. Adiciona uma pequena sombra sutil (opcional, para dar profundidade) */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /* --- Estilo dos Títulos das Seções (h2) --- */
 section h2 {
@@ -162,35 +150,7 @@ section {
   font-size: 1.05rem; /* ligeiro aumento */
   line-height: 1.6;
   margin: 0;
-  color: #ffffff;
-}
-
-/* Responsivo: empilha em telas menores */
-@media (max-width: 900px){
-  .about-container{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-  .about-photo{
-    flex-basis:180px;
-    max-width:180px;
-  }
-  .about-dra{ font-size:1rem; }
-}
-
-/* Melhora espaçamento interno do carrossel */
-.instagram-swiper {
-  width: 100%;
-  padding: 1rem 0;
-  box-sizing: border-box;
-}
-.instagram-swiper .swiper-slide {
-  padding: 0.75rem; /* espaço entre slide e borda */
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #B69987;
 }
 
 /* Limita largura do texto sobre a doutora e o centraliza */
@@ -211,7 +171,7 @@ section {
   font-size: 1.2rem; /* aumento do tamanho */
   line-height: 1.6;
   margin: 0;
-  color: #ffffff;
+  color: #B69987;
 }
 
 @media (max-width: 900px){
@@ -225,4 +185,363 @@ section {
     max-width:180px;
   }
   .about-dra{ font-size:1.05rem; } /* ajuste responsivo */
+}
+
+/* Estilização do Banner Principal */
+.hero-banner {
+    width: 100%; 
+    max-width: 100% !important; /* Ignora o limite de 1200px das outras seções */
+    margin: 0 !important;       /* Remove a margem automática das outras seções */
+    padding: 0 !important;      /* Remove o preenchimento de 20px das outras seções */
+    line-height: 0;
+    overflow: hidden;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* Adicione a proporção para evitar que a imagem estique */
+    aspect-ratio: 21 / 9; 
+}
+
+/* Ajuste para Tablet e Celular */
+@media (max-width: 1024px) {
+    .hero-banner img {
+        /* Proporção mais alta para telas menores (16:9) */
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-banner img {
+        /* Proporção quase quadrada para celulares, dando mais destaque */
+        aspect-ratio: 4 / 3;
+        min-height: 250px;
+    }
+}
+
+#antes-depois {
+    padding: 60px 0;
+    background-color: #fffaf5;
+}
+
+.antes-depois-swiper {
+    width: 100%;
+    max-width: 1100px;
+    padding-bottom: 50px;
+}
+
+.comparison-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.comparison-item {
+    position: relative;
+    flex: 1;
+}
+
+.comparison-item img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(182, 153, 135, 0.2);
+}
+
+.comparison-item span {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(181, 158, 143, 0.8);
+    color: white;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.procedimento-nome {
+    text-align: center;
+    margin-top: 15px;
+    color: #b59e8f;
+    font-weight: 400;
+}
+
+/* Customização das setas para combinar com sua paleta */
+.swiper-button-next, .swiper-button-prev {
+    color: #b59e8f !important;
+        z-index: 10;
+}
+
+.swiper-pagination-bullet-active {
+    background: #b59e8f !important;
+}
+
+/* Efeito de zoom suave ao passar o mouse na foto do caso */
+.comparison-item {
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+.comparison-item:hover {
+    transform: scale(1.02); /* Aumenta levemente a imagem */
+}
+
+/* Estilo base dos itens do carrossel */
+.swiper-slide {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0.5; /* Deixa as fotos laterais levemente apagadas */
+    transform: scale(0.85); /* Deixa as fotos laterais menores */
+}
+
+/* Estilo da foto em DESTAQUE (Central) */
+.swiper-slide-active {
+    opacity: 1 !important; /* Foto central totalmente visível */
+    transform: scale(1.05) !important; /* Foto central maior */
+    z-index: 2;
+}
+
+/* Ajuste do container para não cortar o zoom da foto central */
+.antes-depois-swiper {
+    padding: 40px 0 !important;
+    overflow: hidden;
+}
+
+/* Melhora a transição da imagem */
+.comparison-item {
+    transition: all 0.5s ease;
+}
+
+/* Faz a transição do carrossel ser linear (constante) */
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+/* Garante que o efeito de zoom seja suave ao navegar */
+.swiper-slide {
+    transition: transform 0.8s ease, opacity 0.8s ease !important;
+    opacity: 0.4; 
+    transform: scale(0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Destaque da foto centralizada */
+.swiper-slide-active, .swiper-slide-duplicate-active {
+    opacity: 1 !important;
+    transform: scale(1.1) !important; /* Foto do meio maior */
+    z-index: 10;
+}
+
+/* Estilo das imagens internas para não quebrarem o layout */
+.comparison-item {
+    width: 100%;
+    max-width: 350px; /* Evita que fiquem gigantes como na foto que você enviou */
+    height: auto;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.comparison-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* FORÇA O MOVIMENTO CONTÍNUO E LINEAR */
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+/* REMOVE AS SETAS VISUALMENTE (Já que você não quer navegação por setas) */
+.swiper-button-next, 
+.swiper-button-prev, 
+.swiper-pagination {
+    display: none !important;
+}
+
+/* AJUSTE DAS FOTOS PARA DESTAQUE CENTRAL */
+.swiper-slide {
+    transition: transform 0.3s ease;
+    transform: scale(0.9);
+    opacity: 0.6;
+}
+
+.swiper-slide-active {
+    transform: scale(1.1); /* Foto do centro maior */
+    opacity: 1;
+    z-index: 10;
+}
+
+/* EFEITO ESTEIRA: Remove a aceleração/desaceleração padrão */
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+/* ESTILO DAS FOTOS LATERAIS (MENORES) */
+.swiper-slide {
+    transition: transform 0.8s ease, opacity 0.8s ease !important;
+    opacity: 0.3; /* Mais apagadas para focar no centro */
+    transform: scale(0.8);
+    display: flex;
+    justify-content: center;
+}
+
+/* ESTILO DA FOTO CENTRAL (EM DESTAQUE) */
+.swiper-slide-active {
+    opacity: 1 !important;
+    transform: scale(1.15) !important; /* Fica visivelmente maior */
+    z-index: 10;
+}
+
+/* REMOVER BOTÕES E PAGINAÇÃO TOTALMENTE */
+.swiper-button-next, 
+.swiper-button-prev, 
+.swiper-pagination {
+    display: none !important;
+}
+
+/* AJUSTE DAS IMAGENS */
+.comparison-item {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(181, 158, 143, 0.2);
+}
+
+/* 1. Remove o destaque automático do slide central */
+.swiper-slide {
+    transition: transform 0.4s ease, opacity 0.4s ease !important;
+    opacity: 0.7; /* Todas ficam levemente suaves durante o movimento */
+    transform: scale(1); /* Tamanho padrão para todas */
+    display: flex;
+    justify-content: center;
+}
+
+/* 2. Aplica o destaque APENAS no mouse hover */
+.swiper-slide:hover {
+    opacity: 1 !important;
+    transform: scale(1.15) !important; /* Aumenta a imagem sob o mouse */
+    z-index: 99; /* Garante que ela fique por cima das outras ao crescer */
+}
+
+/* 3. Mantém o movimento contínuo e linear */
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+/* 4. Ajuste da borda e arredondamento (Estilo Clean Dra. Milene) */
+.comparison-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: box-shadow 0.4s ease;
+}
+
+.swiper-slide:hover .comparison-item {
+    box-shadow: 0 10px 30px rgba(181, 158, 143, 0.3); /* Sombra mais profunda no hover */
+}
+
+/* --- Estilo Base de todos os Slides --- */
+.swiper-slide {
+    transition: transform 0.4s ease, opacity 0.4s ease !important;
+    opacity: 1 !important;    /* Garante que NENHUMA imagem fique esbranquiçada ao passar */
+    transform: scale(1) !important; /* Garante que TODAS fiquem do mesmo tamanho ao passar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* --- DESTAQUE MANUAL: Apenas quando o mouse estiver em cima --- */
+.swiper-slide:hover {
+    transform: scale(1.15) !important; /* Fica maior apenas no mouse */
+    z-index: 999; /* Garante que a imagem cresça à frente das outras */
+}
+
+/* Mantém as outras imagens normais mesmo quando uma está com hover */
+.antes-depois-swiper:hover .swiper-slide:not(:hover) {
+    opacity: 0.8; /* Opcional: dá um foco suave na que você escolheu */
+}
+
+/* --- Ajuste da Imagem interna --- */
+.comparison-item {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comparison-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Garante o movimento de esteira sem paradas bruscas */
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+.swiper-slide {
+    /* Mantém a transição suave para o zoom não ser brusco */
+    transition: transform 0.4s ease-out, opacity 0.4s ease !important;
+}
+
+.swiper-slide:hover {
+    transform: scale(1.15) !important;
+    z-index: 999;
+}
+
+/* Quando o mouse estiver no container, removemos a suavidade do wrapper para ele travar na hora */
+.antes-depois-swiper:hover .swiper-wrapper {
+    transition-duration: 0ms !important;
+    transition-timing-function: ease-out !important;
+}
+
+/* Garante que o zoom da imagem continue funcionando suavemente */
+.swiper-slide {
+    transition: transform 0.4s ease-out !important;
+    opacity: 1 !important;
+}
+
+.swiper-slide:hover {
+    transform: scale(1.15) !important;
+    z-index: 999;
+}
+
+.antes-depois-swiper .swiper-wrapper {
+    transition-timing-function: linear !important;
+}
+
+/* Configuração da Esteira Infinita */
+.antes-depois-swiper .swiper-wrapper {
+    /* O segredo da fluidez está aqui */
+    transition-timing-function: linear !important;
+}
+
+/* Estado Normal: Todas as fotos iguais e com movimento */
+.swiper-slide {
+    transition: transform 0.4s ease-out, opacity 0.4s ease !important;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Estado de Pausa: Quando o mouse entra no CONTAINER */
+.antes-depois-swiper:hover .swiper-wrapper {
+    /* Não aplicamos nada aqui para deixar o JS travar a posição */
+}
+
+/* DESTAQUE: Apenas na foto que o usuário escolheu */
+.swiper-slide:hover {
+    transform: scale(1.18) !important; /* Aumenta um pouco mais para dar destaque */
+    z-index: 999;
+    opacity: 1 !important;
+}
+
+/* Opacidade opcional: deixa as outras fotos um pouco mais escuras ao focar em uma */
+.antes-depois-swiper:hover .swiper-slide:not(:hover) {
+    opacity: 0.6;
 }
