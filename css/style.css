@@ -1,198 +1,189 @@
+/* Base */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-    /* (Manter as configurações que já fizemos) */
-    background-color: #fffaf5; /* Fundo do site: Bege suave */
-    color: #B69987; /* Cor da fonte padrão: Branco */
+    margin: 0;
+    background-color: #fffaf5;
+    color: #5C4D43;
     font-family: 'Montserrat', sans-serif;
-    margin: 0; /* É crucial remover a margem padrão do body para o header ocupar 100% */
-    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- Estilo do Header (Barra Superior) --- */
-header {
-    background-color: #b59e8f; 
-    width: 100%; 
-    padding: 0; 
-    margin: 0; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+::selection {
+    background: #b59e8f;
+    color: #fff;
 }
 
-/* --- O Novo Container para o Logo e o Menu --- */
-.container-header {
-    /* Centraliza o conteúdo horizontalmente na página (opcional, mas bom para websites grandes) */
-    max-width: 1200px; 
-    margin: 0 auto; 
-    
-    /* Usa Flexbox para colocar os itens lado a lado */
-    display: flex; 
-    
-    /* Centraliza os itens verticalmente (Logo e Menu) */
-    align-items: center; 
-    
-    /* O MAIS IMPORTANTE: Joga o primeiro item (Logo) para a esquerda e o restante para a direita */
-    justify-content: space-between; 
-    
-    padding: 0 20px; /* Adiciona um pequeno espaço nas laterais para não encostar na borda */
+.font-serif-display {
+    font-family: 'Cormorant Garamond', serif;
 }
 
-/* --- Estilo da Imagem do Logo --- */
-.logo img {
-    /* Defina uma altura para a imagem do logo na barra de navegação */
-    height: 60px; /* Ajuste este valor conforme o seu gosto (ex: 50px, 70px) */
-    /* Garante que o link em volta do logo não tenha sublinhado */
+a { color: inherit; }
+
+/* --- Header --- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    padding: 1rem 0;
+    transition: all 0.5s;
+}
+
+.site-header.scrolled {
+    background: rgba(255, 250, 245, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(230, 214, 201, 0.6);
+    padding: 0.5rem 0;
+}
+
+.header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.header-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #b59e8f;
+}
+
+.header-logo-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.header-logo-text {
+    display: none;
+    flex-direction: column;
+    line-height: 1;
+}
+
+@media (min-width: 640px) {
+    .header-logo-text { display: flex; }
+}
+
+.header-logo-text .brand {
+    color: #5C4D43;
+    letter-spacing: 0.3em;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.header-logo-text .sub {
+    color: #B69987;
+    letter-spacing: 0.15em;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.header-nav {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+    .header-nav { display: flex; }
+}
+
+.header-nav a {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5C4D43;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.header-nav a:hover { color: #b59e8f; }
+
+.header-nav .btn-agendar {
+    margin-left: 0.75rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    background: #b59e8f;
+    color: #fff !important;
+    transition: background-color 0.3s;
+}
+
+.header-nav .btn-agendar:hover { background: #5C4D43; }
+
+.menu-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    color: #5C4D43;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+    .menu-toggle { display: none; }
+}
+
+.mobile-menu {
+    display: none;
+    background: rgba(255, 250, 245, 0.98);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(230, 214, 201, 0.6);
+    margin-top: 0.5rem;
+}
+
+.mobile-menu.open { display: block; }
+
+.mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 24px;
+}
+
+.mobile-menu-inner a {
+    padding: 0.75rem 0;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C4D43;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(230, 214, 201, 0.5);
+}
+
+.mobile-menu-inner .btn-agendar {
+    margin-top: 1rem;
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    background: #b59e8f;
+    color: #fff;
     border: none;
 }
 
-/* --- Limpeza e Posicionamento Horizontal (CORRIGIDO) --- */
-nav ul {
-    /* (Linha background-color foi removida/comentada) */
-    
-    /* 1. Remove as bolinhas (marcadores) da lista */
-    list-style: none; 
-    
-    /* 2. Remove o preenchimento padrão do navegador */
-    padding: 0; 
-    
-    /* 3. Remove a margem padrão do navegador */
-    margin: 0; 
-    
-    /* 4. O mais importante: Usa Flexbox para colocar os itens lado a lado */
-    display: flex; 
-    
-    /* 5. Centraliza os itens verticalmente (se houver alturas diferentes) */
-    align-items: center; 
-}
-
-/* --- Estilo dos Itens do Menu (os links <a>) --- */
-nav a {
-    /* Cor da fonte definida anteriormente para branco */
-    color: #ffffff; 
-    
-    /* Remove o sublinhado padrão dos links */
-    text-decoration: none; 
-    
-    /* Adiciona espaço interno ao redor do texto para aumentar a área clicável */
-    padding: 15px 25px; 
-    
-    /* Transforma os links em blocos para que o padding funcione corretamente */
-    display: block; 
-    
-    /* Transições suaves para efeitos de hover (opcional, mas profissional) */
-    transition: background-color 0.3s ease; 
-
-    font-weight: 300; /* Define a fonte fina (Light) */
-}
-
-/* --- Efeito de Hover (Ao passar o mouse) --- */
-nav a:hover {
-    /* Sugestão: Uma cor ligeiramente mais clara para dar feedback ao usuário */
-    background-color: rgba(255, 255, 255, 0.1); 
-}
-/* --- Estilo do Corpo (body) --- */
-
-
-/* --- Estilo dos Títulos das Seções (h2) --- */
-section h2 {
-    /* Garante que a fonte Montserrat seja usada nos títulos */
-    font-family: 'Montserrat', sans-serif;
-    
-    /* Define o peso da fonte para o fino (Light), como no logo e no menu */
-    font-weight: 300; 
-    
-    /* Aumenta o tamanho da fonte para dar destaque */
-    font-size: 2.2em; 
-    
-    /* Adiciona margem vertical para separar do conteúdo */
-    margin-top: 50px; 
-    margin-bottom: 20px;
-    
-    /* Adiciona padding horizontal para afastar das bordas laterais */
-    padding-left: 20px; 
-}
-
-/* Centraliza cada seção e adiciona espaçamento lateral */
-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px; /* espaço nas extremidades */
-  box-sizing: border-box;
-}
-
-/* Layout lado a lado da seção "Sobre a Dra" */
-.about-container{
-  display:flex;
-  gap:24px;
-  align-items:center;
-  max-width:1100px;
-  margin: 0 auto 1.5rem;
-  padding: 0 20px;
-  box-sizing:border-box;
-}
-
-/* Foto da Dra */
-.about-photo{
-  flex: 0 0 220px;
-  max-width: 220px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.about-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-/* Texto: aumentar tamanho e melhorar leitura */
-.about-text{ flex:1; }
-.about-dra{
-  font-size: 1.05rem; /* ligeiro aumento */
-  line-height: 1.6;
-  margin: 0;
-  color: #B69987;
-}
-
-/* Limita largura do texto sobre a doutora e o centraliza */
-.about-dra {
-  max-width: 900px;
-  margin: 0.5rem auto 1.5rem;
-  line-height: 1.6;
-  text-align: left;
-}
-
-/* Ajustes responsivos para telas pequenas */
-@media (max-width: 600px) {
-  section { padding: 0 14px; }
-  .about-dra { max-width: 100%; padding: 0; }
-}
-
-.about-dra{
-  font-size: 1.2rem; /* aumento do tamanho */
-  line-height: 1.6;
-  margin: 0;
-  color: #B69987;
-}
-
-@media (max-width: 900px){
-  .about-container{
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-  .about-photo{
-    flex-basis:180px;
-    max-width:180px;
-  }
-  .about-dra{ font-size:1.05rem; } /* ajuste responsivo */
-}
-
-/* Estilização do Banner Principal */
+/* --- Banner GIF (preservado do projeto) --- */
 .hero-banner {
-    width: 100%; 
-    max-width: 100% !important; /* Ignora o limite de 1200px das outras seções */
-    margin: 0 !important;       /* Remove a margem automática das outras seções */
-    padding: 0 !important;      /* Remove o preenchimento de 20px das outras seções */
+    width: 100%;
+    margin-top: 72px;
     line-height: 0;
     overflow: hidden;
 }
@@ -202,346 +193,280 @@ section {
     height: auto;
     display: block;
     object-fit: cover;
-    /* Adicione a proporção para evitar que a imagem estique */
-    aspect-ratio: 21 / 9; 
+    aspect-ratio: 21 / 9;
 }
 
-/* Ajuste para Tablet e Celular */
 @media (max-width: 1024px) {
-    .hero-banner img {
-        /* Proporção mais alta para telas menores (16:9) */
-        aspect-ratio: 16 / 9;
-    }
+    .hero-banner img { aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 480px) {
     .hero-banner img {
-        /* Proporção quase quadrada para celulares, dando mais destaque */
         aspect-ratio: 4 / 3;
         min-height: 250px;
     }
 }
 
-#antes-depois {
-    padding: 60px 0;
-    background-color: #fffaf5;
+/* --- Hero intro (texto do site de referência) --- */
+.hero-intro {
+    padding: 4rem 0 5rem;
 }
 
-.antes-depois-swiper {
-    width: 100%;
-    max-width: 1100px;
-    padding-bottom: 50px;
+.hero-intro-inner {
+    max-width: 576px;
+    margin: 0 auto;
+    padding: 0 24px;
+    animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.comparison-container {
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-intro .section-eyebrow {
+    letter-spacing: 0.35em;
+}
+
+.hero-intro h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    color: #5C4D43;
+    margin: 0;
+}
+
+.hero-intro h1 em {
+    font-style: italic;
+    color: #b59e8f;
+}
+
+.hero-intro .hero-desc {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: rgba(92, 77, 67, 0.75);
+    line-height: 1.7;
+    max-width: 28rem;
+}
+
+.hero-actions {
+    margin-top: 2.5rem;
     display: flex;
-    gap: 10px;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.comparison-item {
+@media (min-width: 640px) {
+    .hero-actions { flex-direction: row; }
+}
+
+.hero-hours {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: #B69987;
+}
+
+/* --- Transformações (marquee) --- */
+#transformacoes {
+    padding: 6rem 0;
+    background: #f5ede6;
+    max-width: none;
+}
+
+.transformations-header {
+    max-width: 1280px;
+    margin: 0 auto 3.5rem;
+    padding: 0 24px;
+}
+
+.marquee-wrap {
     position: relative;
-    flex: 1;
+    overflow: hidden;
 }
 
-.comparison-item img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(182, 153, 135, 0.2);
-}
-
-.comparison-item span {
+.marquee-fade-left,
+.marquee-fade-right {
+    pointer-events: none;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(181, 158, 143, 0.8);
-    color: white;
-    padding: 2px 8px;
-    font-size: 0.8rem;
-    border-radius: 4px;
+    top: 0;
+    bottom: 0;
+    width: 96px;
+    z-index: 10;
+}
+
+.marquee-fade-left {
+    left: 0;
+    background: linear-gradient(to right, #f5ede6, transparent);
+}
+
+.marquee-fade-right {
+    right: 0;
+    background: linear-gradient(to left, #f5ede6, transparent);
+}
+
+.eme-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.5rem;
+    padding: 0 24px;
+    animation: eme-marquee 45s linear infinite;
+}
+
+.eme-marquee-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes eme-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.transformation-card {
+    position: relative;
+    flex-shrink: 0;
+    width: 280px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+@media (min-width: 768px) {
+    .transformation-card { width: 320px; }
+}
+
+.transformation-card img {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.7s;
+}
+
+.transformation-card:hover img {
+    transform: scale(1.05);
+}
+
+.transformation-badge {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(92, 77, 67, 0.4);
+    backdrop-filter: blur(4px);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.transformation-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(92, 77, 67, 0.7), transparent 50%);
+}
+
+.transformation-label {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
 }
 
-.procedimento-nome {
-    text-align: center;
-    margin-top: 15px;
+/* --- Sobre a Doutora --- */
+#sobre {
+    padding: 6rem 0;
+    max-width: none;
+}
+
+.about-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .about-grid {
+        grid-template-columns: 5fr 7fr;
+    }
+}
+
+.about-photo-wrap {
+    position: relative;
+}
+
+.about-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1px solid #e6d6c9;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.about-photo-wrap img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 2px;
+    display: block;
+}
+
+.about-highlights {
+    margin-top: 2rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .about-highlights { grid-template-columns: 1fr 1fr; }
+}
+
+.about-highlights li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: rgba(92, 77, 67, 0.8);
+}
+
+.about-highlights svg {
+    width: 18px;
+    height: 18px;
     color: #b59e8f;
-    font-weight: 400;
+    flex-shrink: 0;
+    margin-top: 2px;
 }
 
-/* Customização das setas para combinar com sua paleta */
-.swiper-button-next, .swiper-button-prev {
-    color: #b59e8f !important;
-        z-index: 10;
+.about-text p {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(92, 77, 67, 0.75);
+    line-height: 1.7;
 }
 
-.swiper-pagination-bullet-active {
-    background: #b59e8f !important;
+.about-text p + p {
+    margin-top: 1rem;
 }
 
-/* Efeito de zoom suave ao passar o mouse na foto do caso */
-.comparison-item {
-    transition: transform 0.4s ease;
-    cursor: pointer;
-}
-
-.comparison-item:hover {
-    transform: scale(1.02); /* Aumenta levemente a imagem */
-}
-
-/* Estilo base dos itens do carrossel */
-.swiper-slide {
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    opacity: 0.5; /* Deixa as fotos laterais levemente apagadas */
-    transform: scale(0.85); /* Deixa as fotos laterais menores */
-}
-
-/* Estilo da foto em DESTAQUE (Central) */
-.swiper-slide-active {
-    opacity: 1 !important; /* Foto central totalmente visível */
-    transform: scale(1.05) !important; /* Foto central maior */
-    z-index: 2;
-}
-
-/* Ajuste do container para não cortar o zoom da foto central */
-.antes-depois-swiper {
-    padding: 40px 0 !important;
-    overflow: hidden;
-}
-
-/* Melhora a transição da imagem */
-.comparison-item {
-    transition: all 0.5s ease;
-}
-
-/* Faz a transição do carrossel ser linear (constante) */
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-/* Garante que o efeito de zoom seja suave ao navegar */
-.swiper-slide {
-    transition: transform 0.8s ease, opacity 0.8s ease !important;
-    opacity: 0.4; 
-    transform: scale(0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Destaque da foto centralizada */
-.swiper-slide-active, .swiper-slide-duplicate-active {
-    opacity: 1 !important;
-    transform: scale(1.1) !important; /* Foto do meio maior */
-    z-index: 10;
-}
-
-/* Estilo das imagens internas para não quebrarem o layout */
-.comparison-item {
-    width: 100%;
-    max-width: 350px; /* Evita que fiquem gigantes como na foto que você enviou */
-    height: auto;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.comparison-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* FORÇA O MOVIMENTO CONTÍNUO E LINEAR */
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-/* REMOVE AS SETAS VISUALMENTE (Já que você não quer navegação por setas) */
-.swiper-button-next, 
-.swiper-button-prev, 
-.swiper-pagination {
-    display: none !important;
-}
-
-/* AJUSTE DAS FOTOS PARA DESTAQUE CENTRAL */
-.swiper-slide {
-    transition: transform 0.3s ease;
-    transform: scale(0.9);
-    opacity: 0.6;
-}
-
-.swiper-slide-active {
-    transform: scale(1.1); /* Foto do centro maior */
-    opacity: 1;
-    z-index: 10;
-}
-
-/* EFEITO ESTEIRA: Remove a aceleração/desaceleração padrão */
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-/* ESTILO DAS FOTOS LATERAIS (MENORES) */
-.swiper-slide {
-    transition: transform 0.8s ease, opacity 0.8s ease !important;
-    opacity: 0.3; /* Mais apagadas para focar no centro */
-    transform: scale(0.8);
-    display: flex;
-    justify-content: center;
-}
-
-/* ESTILO DA FOTO CENTRAL (EM DESTAQUE) */
-.swiper-slide-active {
-    opacity: 1 !important;
-    transform: scale(1.15) !important; /* Fica visivelmente maior */
-    z-index: 10;
-}
-
-/* REMOVER BOTÕES E PAGINAÇÃO TOTALMENTE */
-.swiper-button-next, 
-.swiper-button-prev, 
-.swiper-pagination {
-    display: none !important;
-}
-
-/* AJUSTE DAS IMAGENS */
-.comparison-item {
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(181, 158, 143, 0.2);
-}
-
-/* 1. Remove o destaque automático do slide central */
-.swiper-slide {
-    transition: transform 0.4s ease, opacity 0.4s ease !important;
-    opacity: 0.7; /* Todas ficam levemente suaves durante o movimento */
-    transform: scale(1); /* Tamanho padrão para todas */
-    display: flex;
-    justify-content: center;
-}
-
-/* 2. Aplica o destaque APENAS no mouse hover */
-.swiper-slide:hover {
-    opacity: 1 !important;
-    transform: scale(1.15) !important; /* Aumenta a imagem sob o mouse */
-    z-index: 99; /* Garante que ela fique por cima das outras ao crescer */
-}
-
-/* 3. Mantém o movimento contínuo e linear */
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-/* 4. Ajuste da borda e arredondamento (Estilo Clean Dra. Milene) */
-.comparison-item {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: box-shadow 0.4s ease;
-}
-
-.swiper-slide:hover .comparison-item {
-    box-shadow: 0 10px 30px rgba(181, 158, 143, 0.3); /* Sombra mais profunda no hover */
-}
-
-/* --- Estilo Base de todos os Slides --- */
-.swiper-slide {
-    transition: transform 0.4s ease, opacity 0.4s ease !important;
-    opacity: 1 !important;    /* Garante que NENHUMA imagem fique esbranquiçada ao passar */
-    transform: scale(1) !important; /* Garante que TODAS fiquem do mesmo tamanho ao passar */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* --- DESTAQUE MANUAL: Apenas quando o mouse estiver em cima --- */
-.swiper-slide:hover {
-    transform: scale(1.15) !important; /* Fica maior apenas no mouse */
-    z-index: 999; /* Garante que a imagem cresça à frente das outras */
-}
-
-/* Mantém as outras imagens normais mesmo quando uma está com hover */
-.antes-depois-swiper:hover .swiper-slide:not(:hover) {
-    opacity: 0.8; /* Opcional: dá um foco suave na que você escolheu */
-}
-
-/* --- Ajuste da Imagem interna --- */
-.comparison-item {
-    width: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.comparison-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Garante o movimento de esteira sem paradas bruscas */
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-.swiper-slide {
-    /* Mantém a transição suave para o zoom não ser brusco */
-    transition: transform 0.4s ease-out, opacity 0.4s ease !important;
-}
-
-.swiper-slide:hover {
-    transform: scale(1.15) !important;
-    z-index: 999;
-}
-
-/* Quando o mouse estiver no container, removemos a suavidade do wrapper para ele travar na hora */
-.antes-depois-swiper:hover .swiper-wrapper {
-    transition-duration: 0ms !important;
-    transition-timing-function: ease-out !important;
-}
-
-/* Garante que o zoom da imagem continue funcionando suavemente */
-.swiper-slide {
-    transition: transform 0.4s ease-out !important;
-    opacity: 1 !important;
-}
-
-.swiper-slide:hover {
-    transform: scale(1.15) !important;
-    z-index: 999;
-}
-
-.antes-depois-swiper .swiper-wrapper {
-    transition-timing-function: linear !important;
-}
-
-/* Configuração da Esteira Infinita */
-.antes-depois-swiper .swiper-wrapper {
-    /* O segredo da fluidez está aqui */
-    transition-timing-function: linear !important;
-}
-
-/* Estado Normal: Todas as fotos iguais e com movimento */
-.swiper-slide {
-    transition: transform 0.4s ease-out, opacity 0.4s ease !important;
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Estado de Pausa: Quando o mouse entra no CONTAINER */
-.antes-depois-swiper:hover .swiper-wrapper {
-    /* Não aplicamos nada aqui para deixar o JS travar a posição */
-}
-
-/* DESTAQUE: Apenas na foto que o usuário escolheu */
-.swiper-slide:hover {
-    transform: scale(1.18) !important; /* Aumenta um pouco mais para dar destaque */
-    z-index: 999;
-    opacity: 1 !important;
-}
-
-/* Opacidade opcional: deixa as outras fotos um pouco mais escuras ao focar em uma */
-.antes-depois-swiper:hover .swiper-slide:not(:hover) {
-    opacity: 0.6;
+@media (min-width: 768px) {
+    .about-text p { font-size: 1.125rem; }
 }
