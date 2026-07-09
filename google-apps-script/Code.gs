@@ -66,6 +66,9 @@ function doGet(e) {
     }
     return htmlPage('EME Agendamentos', 'Sistema de agendamento ativo.', true);
   } catch (err) {
+    if (action === 'book') {
+      return jsonResponse({ success: false, message: err.message || 'Não foi possível processar esta solicitação.' });
+    }
     return htmlPage('Erro', err.message || 'Não foi possível processar esta ação.', false);
   }
 }
