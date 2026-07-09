@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const WA = 'https://wa.me/5511947873054?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20com%20a%20Dra.%20Milene%20Miranda.';
-
     // Header scroll
     const header = document.querySelector('.site-header');
     if (header) {
@@ -42,32 +40,72 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Contact form → WhatsApp
+    // Date picker: mínimo amanhã
+    const dateInput = document.getElementById('agenda-data');
+    if (dateInput) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+    }
+
+    // Formulário de agendamento → Google Apps Script
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const msgEl = document.getElementById('form-message');
-            const nome = contactForm.nome.value.trim();
-            const telefone = contactForm.telefone.value.trim();
-            const email = contactForm.email.value.trim();
-            const mensagem = contactForm.mensagem.value.trim();
-            const interesse = contactForm.interesse.value.trim();
+            const submitBtn = document.getElementById('contact-submit');
 
-            if (!nome || !telefone || !email || !mensagem) {
+            const payload = {
+                nome: contactForm.nome.value.trim(),
+                telefone: contactForm.telefone.value.trim(),
+                email: contactForm.email.value.trim(),
+                interesse: contactForm.interesse.value.trim(),
+                mensagem: contactForm.mensagem.value.trim(),
+                data: contactForm.data.value,
+                hora: contactForm.hora.value,
+            };
+
+            if (!payload.nome || !payload.telefone || !payload.email || !payload.data || !payload.hora) {
                 msgEl.textContent = 'Por favor, preencha todos os campos obrigatórios.';
                 msgEl.className = 'form-message error';
                 return;
             }
 
+            if (typeof APPS_SCRIPT_URL === 'undefined' || !APPS_SCRIPT_URL) {
+                msgEl.textContent = 'Sistema de agendamento em configuração. Entre em contato pelo WhatsApp.';
+                msgEl.className = 'form-message error';
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
             msgEl.className = 'form-message';
 
-            let text = `Olá! Gostaria de agendar uma avaliação com a Dra. Milene Miranda.\n\n`;
-            text += `Nome: ${nome}\nTelefone: ${telefone}\nE-mail: ${email}\n`;
-            if (interesse) text += `Tratamento de interesse: ${interesse}\n`;
-            text += `\nMensagem: ${mensagem}`;
+            try {
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload),
+                });
 
-            window.open(`https://wa.me/5511947873054?text=${encodeURIComponent(text)}`, '_blank');
+                const result = await res.json();
+
+                if (result.success) {
+                    msgEl.textContent = result.message;
+                    msgEl.className = 'form-message success';
+                    contactForm.reset();
+                } else {
+                    msgEl.textContent = result.message || 'Não foi possível enviar. Tente novamente.';
+                    msgEl.className = 'form-message error';
+                }
+            } catch (err) {
+                msgEl.textContent = 'Erro de conexão. Tente novamente ou contate pelo WhatsApp.';
+                msgEl.className = 'form-message error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Solicitar agendamento';
+            }
         });
     }
 });

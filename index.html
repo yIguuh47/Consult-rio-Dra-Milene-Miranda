@@ -67,7 +67,7 @@
                 <a class="btn-primary" href="https://wa.me/5511947873054?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20com%20a%20Dra.%20Milene%20Miranda." target="_blank" rel="noreferrer">Agendar Avaliação</a>
                 <a class="btn-outline" href="#transformacoes">Ver Transformações</a>
             </div>
-            <p class="hero-hours">Terça a Sexta · 09h às 18h</p>
+            <p class="hero-hours">Segunda a Sexta · 09h às 18h</p>
         </div>
     </section>
 
@@ -321,7 +321,7 @@
                 <div class="contact-intro">
                     <p class="section-eyebrow">Fale Conosco</p>
                     <h2 class="section-title-serif">Vamos cuidar do seu sorriso juntos?</h2>
-                    <p>Preencha o formulário e nossa equipe entrará em contato para confirmar o melhor horário. Os agendamentos são confirmados manualmente com todo cuidado.</p>
+                    <p>Preencha o formulário para solicitar um horário. A Dra. Milene confirma manualmente e você recebe a resposta por e-mail.</p>
                     <form id="contact-form" class="contact-form">
                         <div class="form-row">
                             <input type="text" name="nome" placeholder="Nome completo *" required>
@@ -331,9 +331,25 @@
                             <input type="email" name="email" placeholder="E-mail *" required>
                             <input type="text" name="interesse" placeholder="Tratamento de interesse">
                         </div>
-                        <textarea name="mensagem" placeholder="Sua mensagem *" rows="4" required></textarea>
+                        <div class="form-row">
+                            <input type="date" name="data" id="agenda-data" required>
+                            <select name="hora" id="agenda-hora" required>
+                                <option value="" disabled selected>Horário preferido *</option>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                            </select>
+                        </div>
+                        <p class="form-hint">Segunda a sexta · 09h às 18h · Consultas de 60 minutos</p>
+                        <textarea name="mensagem" placeholder="Observações (opcional)" rows="3"></textarea>
                         <p id="form-message" class="form-message"></p>
-                        <button type="submit" class="btn-primary">Enviar mensagem</button>
+                        <button type="submit" class="btn-primary" id="contact-submit">Solicitar agendamento</button>
                     </form>
                 </div>
                 <div class="contact-side">
@@ -351,7 +367,7 @@
                         </a>
                         <div class="contact-info-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            <span>Terça a Sexta · 09h às 18h</span>
+                            <span>Segunda a Sexta · 09h às 18h</span>
                         </div>
                         <div class="contact-info-item contact-instagram">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -382,7 +398,7 @@
                 <p>(11) 94787-3054</p>
                 <p class="muted">Alameda das Violetas, 100 · Sala 126</p>
                 <p class="muted">12º andar · Nova Arujá, Arujá - SP · 07411-375</p>
-                <p class="muted">Terça a Sexta · 09h às 18h</p>
+                <p class="muted">Segunda a Sexta · 09h às 18h</p>
             </div>
             <div class="footer-col footer-social">
                 <p class="footer-col-title">Redes</p>
@@ -407,6 +423,7 @@
     </a>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/sections.js"></script>
 
 </body>
