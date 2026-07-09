@@ -60,3 +60,35 @@ E-mail para paciente: "Consulta confirmada"
 ## Atualizar o script depois
 
 Se alterar `Code.gs`, crie uma **Nova versão** em **Implantar → Gerenciar implantações → Editar → Nova versão**. A URL permanece a mesma.
+
+## Problemas comuns
+
+### "Erro de conexão" ou "servidor não está respondendo"
+
+A URL do Web App está inválida ou sem acesso público. Faça isto:
+
+1. Abra [script.google.com](https://script.google.com) → projeto **EME Agendamentos**
+2. **Implantar → Gerenciar implantações**
+3. Clique no ícone de **lápis (Editar)** na implantação ativa
+4. Confirme:
+   - **Executar como:** Eu (`dramilenemiranda@gmail.com`)
+   - **Quem tem acesso:** **Qualquer pessoa** (não "Qualquer pessoa com conta Google")
+5. Selecione **Nova versão** → **Implantar**
+6. **Copie a URL** que termina em `/exec` (não use URL de teste `/dev`)
+7. Cole em `js/config.js` e publique no GitHub
+
+### Testar se a URL está correta
+
+Abra a URL do Web App **em aba anônima** (sem login no Google), ou copie exatamente esta URL:
+
+`https://script.google.com/macros/s/SEU_ID/exec`
+
+**Não use** URLs com `/u/0/`, `/u/1/`, `/u/2/` etc. — isso indica que o Chrome abriu com outra conta Google logada e pode mostrar "Não foi possível abrir o arquivo" mesmo com a implantação correta.
+
+Deve aparecer:
+
+> **EME Agendamentos** — Sistema de agendamento ativo.
+
+### "Execute a função setup()"
+
+No editor do Apps Script, selecione a função `setup` e clique em **Executar** (uma única vez). Isso cria a planilha de agendamentos necessária para o sistema funcionar.

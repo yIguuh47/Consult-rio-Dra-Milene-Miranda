@@ -83,13 +83,19 @@ document.addEventListener('DOMContentLoaded', function () {
             msgEl.className = 'form-message';
 
             try {
-                const res = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload),
-                });
+                const params = new URLSearchParams({ action: 'book', ...payload });
+                const res = await fetch(APPS_SCRIPT_URL + '?' + params.toString());
 
-                const result = await res.json();
+                const text = await res.text();
+                let result;
+
+                try {
+                    result = JSON.parse(text);
+                } catch (parseErr) {
+                    msgEl.textContent = 'O servidor de agendamento não está respondendo. Confirme que o setup() foi executado e que a implantação permite acesso a qualquer pessoa.';
+                    msgEl.className = 'form-message error';
+                    return;
+                }
 
                 if (result.success) {
                     msgEl.textContent = result.message;

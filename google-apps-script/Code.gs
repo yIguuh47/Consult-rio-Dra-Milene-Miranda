@@ -44,6 +44,18 @@ function doGet(e) {
   var token = e.parameter.token || '';
 
   try {
+    if (action === 'book') {
+      var booked = handleNewAppointment({
+        nome: e.parameter.nome,
+        telefone: e.parameter.telefone,
+        email: e.parameter.email,
+        interesse: e.parameter.interesse || '',
+        mensagem: e.parameter.mensagem || '',
+        data: e.parameter.data,
+        hora: e.parameter.hora
+      });
+      return jsonResponse(booked);
+    }
     if (action === 'approve') {
       var approved = handleApprove(id, token);
       return htmlPage('Agendamento confirmado', approved.message, true);
