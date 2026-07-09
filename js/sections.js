@@ -50,6 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Formulário de agendamento → Google Apps Script
     const contactForm = document.getElementById('contact-form');
+
+    function toUserMessage(message) {
+        const msg = (message || '').trim();
+        if (!msg) {
+            return 'Não foi possível concluir o agendamento. Tente outro horário ou entre em contato pelo WhatsApp.';
+        }
+        if (/setup\(\)|apps script|script properties|spreadsheet_id/i.test(msg)) {
+            return 'Não foi possível concluir o agendamento no momento. Por favor, entre em contato pelo WhatsApp.';
+        }
+        return msg;
+    }
+
     if (contactForm) {
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -106,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     msgEl.className = 'form-message success';
                     contactForm.reset();
                 } else {
-                    msgEl.textContent = result.message || 'Não foi possível enviar. Tente novamente.';
+                    msgEl.textContent = toUserMessage(result.message);
                     msgEl.className = 'form-message error';
                 }
             } catch (err) {

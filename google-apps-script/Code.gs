@@ -32,7 +32,7 @@ function doPost(e) {
     var result = handleNewAppointment(data);
     return jsonResponse(result);
   } catch (err) {
-    return jsonResponse({ success: false, message: err.message || 'Erro ao processar solicitação.' });
+    return jsonResponse({ success: false, message: toUserMessage(err.message) });
   }
 }
 
@@ -67,7 +67,7 @@ function doGet(e) {
     return htmlPage('EME Agendamentos', 'Sistema de agendamento ativo.', true);
   } catch (err) {
     if (action === 'book') {
-      return jsonResponse({ success: false, message: err.message || 'Não foi possível processar esta solicitação.' });
+      return jsonResponse({ success: false, message: toUserMessage(err.message) });
     }
     return htmlPage('Erro', err.message || 'Não foi possível processar esta ação.', false);
   }
@@ -228,19 +228,19 @@ function validateSlot(start) {
 function hasCalendarConflict(start, end) {
   var calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID);
   var events = calendar.getEvents(start, end);
-  return events.length > 0;
+  for (var i = 0; i < events.length; i++) {
+    if (events[i].isAllDayEvent()) continue;
+    return true;
+  }
+  return false;
 }
 
 // ─── Planilha ─────────────────────────────────────────────────────────────────
 
 function getSheet() {
+  ensureSetup();
   var props = PropertiesService.getScriptProperties();
   var sheetId = props.getProperty('SPREADSHEET_ID');
-
-  if (!sheetId) {
-    throw new Error('Execute a função setup() no editor do Apps Script antes de usar o sistema.');
-  }
-
   var ss = SpreadsheetApp.openById(sheetId);
   var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
   if (!sheet) {
@@ -392,6 +392,17 @@ function formatDateBR(dateStr, timeStr) {
   return parts[2] + '/' + parts[1] + '/' + parts[0] + ' às ' + timeStr;
 }
 
+function toUserMessage(message) {
+  var msg = (message || '').trim();
+  if (!msg) {
+    return 'Não foi possível concluir o agendamento. Tente outro horário ou entre em contato pelo WhatsApp.';
+  }
+  if (/setup\(\)|apps script|script properties|spreadsheet_id/i.test(msg)) {
+    return 'Não foi possível concluir o agendamento no momento. Por favor, entre em contato pelo WhatsApp.';
+  }
+  return msg;
+}
+
 function jsonResponse(obj) {
   return ContentService
     .createTextOutput(JSON.stringify(obj))
@@ -413,19 +424,18 @@ function htmlPage(title, message, success) {
   return HtmlService.createHtmlOutput(html).setTitle(title);
 }
 
-// ─── Setup inicial (rodar UMA VEZ no editor) ──────────────────────────────────
+// ─── Setup inicial (automático ou manual no editor) ─────────────────────────────
 
-function setup() {
+function ensureSetup() {
   var props = PropertiesService.getScriptProperties();
 
   if (!props.getProperty('TOKEN_SECRET')) {
     props.setProperty('TOKEN_SECRET', Utilities.getUuid());
   }
 
-  var sheetId = props.getProperty('SPREADSHEET_ID');
-  if (!sheetId) {
+  if (!props.getProperty('SPREADSHEET_ID')) {
     var ss = SpreadsheetApp.create('EME — Agendamentos');
-    sheetId = ss.getId();
+    var sheetId = ss.getId();
     props.setProperty('SPREADSHEET_ID', sheetId);
 
     var sheet = ss.getActiveSheet();
@@ -438,6 +448,9 @@ function setup() {
 
     Logger.log('Planilha criada: ' + ss.getUrl());
   }
+}
 
+function setup() {
+  ensureSetup();
   Logger.log('Setup concluído! Agora faça o Deploy da Web App (veja SETUP.md).');
 }
